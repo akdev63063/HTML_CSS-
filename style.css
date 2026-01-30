@@ -1,6 +1,6 @@
 h1 
 {
-    color:yellow;
+    color:black;
 }
 p
 {
@@ -9,4 +9,9 @@ p
 button
 {
     color: brown;
+    background-color: coral;
+}
+
+body{
+    background-color: yellow;
 }
