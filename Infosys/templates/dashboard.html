@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <h1>Welcome, {{ user }}</h1>
+    <p>You are logged in using JWT authentication.</p>
+  </body>
+</html>
+
+    <script src="/static/token-manager.js"></script>
+    <script>
+      // Display token from localStorage
+      window.addEventListener("load", function () {
+        const token = TokenManager.getToken();
+        const username = TokenManager.getUsername();
+
+        if (!token) {
+          // If no token in localStorage, check if we got it from server
+          // and redirect to login if not
+          window.location.href = "/login";
+          return;
+        }
+
+        document.getElementById("tokenDisplay").textContent =
+          token || "No token found";
+        if (username) {
+          document.getElementById("welcomeUser").textContent = username;
+        }
+      });
+
+      function copyToken() {
+        const token = TokenManager.getToken();
+        navigator.clipboard.writeText(token).then(() => {
+          alert("Token copied to clipboard!");
+        });
+      }
+
+      function viewTokenInHeader() {
+        const token = TokenManager.getToken();
+        alert("Authorization: Bearer " + token);
+      }
+    </script>
+  </body>
+</html>

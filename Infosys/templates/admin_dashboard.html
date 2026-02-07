@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <h1>Admin Panel</h1>
+    <p>Welcome, {{ user }}. You have administrative access.</p>
+  </body>
+</html>
+    >
+      <h3>JWT Token (localStorage):</h3>
+      <p
+        id="tokenDisplay"
+        style="
+          word-break: break-all;
+          font-family: monospace;
+          font-size: 12px;
+          background: white;
+          padding: 10px;
+          border-radius: 3px;
+        "
+      ></p>
+      <button onclick="copyToken()">Copy Token</button>
+      <button onclick="viewTokenInHeader()">
+        View as Authorization Header
+      </button>
+    </div>
+
+    <a
+      href="/logout"
+      style="
+        margin-top: 20px;
+        display: inline-block;
+        padding: 10px 20px;
+        background: #dc3545;
+        color: white;
+        text-decoration: none;
+        border-radius: 3px;
+      "
+      >Logout</a
+    >
+
+    <script src="/static/token-manager.js"></script>
+    <script>
+      // Display token from localStorage
+      window.addEventListener("load", function () {
+        const token = TokenManager.getToken();
+        const username = TokenManager.getUsername();
+        const role = TokenManager.getRole();
+
+        if (!token || role !== "admin") {
+          // If no token or not admin, redirect to login
+          window.location.href = "/login";
+          return;
+        }
+
+        document.getElementById("tokenDisplay").textContent =
+          token || "No token found";
+        if (username) {
+          document.getElementById("adminUser").textContent = username;
+        }
+      });
+
+      function copyToken() {
+        const token = TokenManager.getToken();
+        navigator.clipboard.writeText(token).then(() => {
+          alert("Token copied to clipboard!");
+        });
+      }
+
+      function viewTokenInHeader() {
+        const token = TokenManager.getToken();
+        alert("Authorization: Bearer " + token);
+      }
+    </script>
+  </body>
+</html>
