@@ -16,4 +16,23 @@ body{
     background-size: cover;
     background-repeat: no-repeat;
 }
-   
+.text_ccontainer
+{
+    color: whitesmoke;
+    margin: 0 auto ;
+    padding-top: 410px;
+    padding-left: 185px;
+}
+.lg_text
+{
+    font-size: 72px;
+    margin-top:0px;
+    padding-top:0px;
+}
+.black_box
+{
+    font-size: 50px;
+    text-align: center;
+    color: white;
+    background-color: black;
+}
